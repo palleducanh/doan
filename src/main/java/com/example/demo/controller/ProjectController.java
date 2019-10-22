@@ -95,7 +95,7 @@ public class ProjectController {
 
 	@RequestMapping(value = "/project/detail/{id}", method = RequestMethod.GET)
 	public ModelAndView detail(@PathVariable int id) {
-
+        System.out.println("log data");
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName(); // get logged in username

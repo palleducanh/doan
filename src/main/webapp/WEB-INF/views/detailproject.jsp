@@ -36,11 +36,15 @@
 
 	<div class="" role="tabpanel" data-example-id="togglable-tabs">
 	<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-		<li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Home</a>
+		<li role="presentation" class="active"><a href="/project/detail/${project.projectId}">Home</a>
 		</li>
-		<li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Profile</a>
+		<li role="presentation" class=""><a href="/project/${project.projectId}/staff" >View
+			list staff of project</a>
 		</li>
-		<li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
+		<li role="presentation" class=""><a href="/project/${project.projectId}/task">View
+			list task of project</a>
+		</li>
+		<li role="presentation" class=""><a href="/project/${project.projectId}/progress" >Project Progress</a>
 		</li>
 	</ul>
 	<div id="myTabContent" class="tab-content">
@@ -121,15 +125,8 @@
 										</div>
 									</div>
 								</div>
-<%--													<div class="row">--%>
-<%--														<div class="col-md-12">--%>
-<%--															<div class="form-group">--%>
-<%--																<label>About Me</label>--%>
-<%--																<textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>--%>
-<%--															</div>--%>
-<%--														</div>--%>
-<%--													</div>--%>
-													<button type="submit" class="btn btn-info btn-fill pull-right">Add Staff To Project</button>
+
+<%--													<button type="submit" class="btn btn-info btn-fill pull-right">Add Staff To Project</button>--%>
 								<div class="clearfix"></div>
 							</form>
 						</div>
@@ -148,102 +145,7 @@
 <%--</div>--%>
 		</div>
 	</div>
-<%--<div class="right_col" role="main">--%>
-<%--	<h3 style="color: green;">Thông Tin Chi Tiết Của Project : ${project.projectName} </h3>--%>
-<%--	<!-- Info Boxes -->--%>
-<%--	<div class="row">--%>
-<%--		<div class="card">--%>
-<%--			<div class="card-body">--%>
-<%--				<form>--%>
-<%--					<div class="row">--%>
-<%--						<div class="col-md-5 pr-1">--%>
-<%--							<div class="form-group">--%>
-<%--								<label>Company</label>--%>
-<%--								<input type="text" class="form-control" disabled="" placeholder="Company" value="Creative PTIT">--%>
-<%--							</div>--%>
-<%--						</div>--%>
-<%--						<div class="col-md-3 px-1">--%>
-<%--							<div class="form-group">--%>
-<%--								<label>Project Name</label>--%>
-<%--								<input type="text" class="form-control" placeholder="Username" value="${project.projectName}">--%>
-<%--							</div>--%>
-<%--						</div>--%>
-<%--						<div class="col-md-4 pl-1">--%>
-<%--							<div class="form-group">PROJECT OUTPUT--%>
-<%--								<label for="exampleInputEmail1">Project Output</label>--%>
-<%--								<input type="email" class="form-control" placeholder="Email" value="${project.projectOutput}">--%>
-<%--							</div>--%>
-<%--						</div>--%>
-<%--					</div>--%>
-<%--					<div class="row">--%>
-<%--						<div class="col-md-6 pr-1">--%>
-<%--							<div class="form-group">--%>
-<%--								<label>START DATE</label>--%>
-<%--								<input type="text" class="form-control" placeholder="Company" value="${project.startDate}">--%>
-<%--							</div>--%>
-<%--						</div>--%>
-<%--						<div class="col-md-6 pl-1">--%>
-<%--							<div class="form-group">--%>
-<%--								<label>DEADLINE</label>--%>
-<%--								<input type="text" class="form-control" placeholder="Last Name" value="${project.deadlineDate}">--%>
-<%--							</div>--%>
-<%--						</div>--%>
-<%--					</div>--%>
-<%--					<div class="row">--%>
-<%--						<div class="col-md-12">--%>
-<%--							<div class="form-group">--%>
-<%--								<label>FINISH DATE</label>--%>
-<%--								<input type="text" class="form-control" placeholder="Home Address" <c:choose>--%>
-<%--									<c:when test="${not empty project.finishDate}">--%>
-<%--										value="${project.finishDate}"--%>
-<%--								</c:when>--%>
-<%--								<c:otherwise>--%>
-<%--									   value="chưa có thời gian kết thúc thực tế"--%>
-<%--								</c:otherwise>--%>
-<%--								</c:choose>"--%>
-<%--								>--%>
-<%--							</div>--%>
-<%--						</div>--%>
-<%--					</div>--%>
-<%--					<div class="row">--%>
-<%--						<div class="col-md-4 pr-1">--%>
-<%--							<div class="form-group">--%>
-<%--								<label>AMOUNT STAFF</label>--%>
-<%--								<input type="text" class="form-control" placeholder="City" value="${project.staffProject.size()}">--%>
-<%--							</div>--%>
-<%--						</div>--%>
-<%--						<div class="col-md-4 px-1">--%>
-<%--							<div class="form-group">--%>
-<%--								<label>AMOUNT TASK</label>--%>
-<%--								<input type="text" class="form-control" placeholder="Country" value="${project.task.size()}">--%>
-<%--							</div>--%>
-<%--						</div>--%>
-<%--						<div class="col-md-4 pl-1">--%>
-<%--							<div class="form-group">--%>
-<%--								<label>STATE</label>--%>
-<%--								<input type="number" class="form-control" placeholder="${project.discription}">--%>
-<%--							</div>--%>
-<%--						</div>--%>
-<%--					</div>--%>
-<%--&lt;%&ndash;					<div class="row">&ndash;%&gt;--%>
-<%--&lt;%&ndash;						<div class="col-md-12">&ndash;%&gt;--%>
-<%--&lt;%&ndash;							<div class="form-group">&ndash;%&gt;--%>
-<%--&lt;%&ndash;								<label>About Me</label>&ndash;%&gt;--%>
-<%--&lt;%&ndash;								<textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>&ndash;%&gt;--%>
-<%--&lt;%&ndash;							</div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;						</div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;					</div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;					<button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>&ndash;%&gt;--%>
-<%--					<div class="clearfix"></div>--%>
-<%--				</form>--%>
-<%--			</div>--%>
-<%--		</div>--%>
-<%--	</div>--%>
 
-
-
-
-<%--	</div>--%>
 
 <!-- jQuery -->
 <script src="http://localhost:8080/vendors/jquery/dist/jquery.min.js"></script>
