@@ -182,6 +182,7 @@ public class ProjectController {
 		Task task = new Task();
 		task.setProjectId(projectService.getProjecByiD(id));
 		model.addAttribute("task", task);
+		model.addAttribute("project", projectService.getProjecByiD(id));
 		return "taskform";
 	}
 

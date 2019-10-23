@@ -42,15 +42,15 @@
 
 		<div class="" role="tabpanel" data-example-id="togglable-tabs">
 			<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-				<li role="presentation" ><a href="/project/detail/${project.projectId}">Home</a>
+				<li role="presentation" ><a href="http://localhost:8080/project/detail/${project.projectId}">Home</a>
 				</li>
-				<li role="presentation" class=""><a href="/project/${project.projectId}/staff" >View
+				<li role="presentation" class=""><a href="http://localhost:8080/project/${project.projectId}/staff" >View
 					list staff of project</a>
 				</li>
-				<li role="presentation" class="active"><a href="/project/${project.projectId}/task">View
+				<li role="presentation" class="active"><a href="http://localhost:8080/project/${project.projectId}/task">View
 					list task of project</a>
 				</li>
-				<li role="presentation" class=""><a href="/project/${project.projectId}/progress" >Project Progress</a>
+				<li role="presentation" class=""><a href="http://localhost:8080/project/${project.projectId}/progress" >Project Progress</a>
 				</li>
 			</ul>
 			<div id="myTabContent" class="tab-content">
