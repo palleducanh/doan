@@ -69,7 +69,27 @@ public class ChartController {
 		model.addAttribute("actual", Util.getListActualProgress(task.getDateStart(), workLogList));
 		return "intror/barGraph";
 	}
-
+	@GetMapping("/task/{id}/logtask")
+	public String taskLog(@PathVariable("id") int id, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName(); // get logged in username
+		model.addAttribute("username", name);
+		Task task = taskService.findById(id);
+		List<TaskProgress> workLogList = taskProgressService.findByTaskIDOrderByDateCreateAsc(id);
+		List<Date> listDate;
+		if (workLogList.size() > 0) {
+			listDate = Util.getListDate(task.getDateStart(), task.getDeadlineDate(),
+					workLogList.get(workLogList.size() - 1).getDateLog());
+		} else {
+			listDate = Util.getListDate(task.getDateStart(), task.getDeadlineDate(), new Date(0));
+		}
+		model.addAttribute("task", task);
+		model.addAttribute("taskprogress", workLogList);
+		model.addAttribute("listdatelog", Util.getLabelFromListDate(listDate));
+		model.addAttribute("expect", Util.getListExpectProgress(task.getDateStart(), task.getDeadlineDate()));
+		model.addAttribute("actual", Util.getListActualProgress(task.getDateStart(), workLogList));
+		return "intror/logTask";
+	}
 	@GetMapping("/displayPieChart")
 	public String pieChart(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

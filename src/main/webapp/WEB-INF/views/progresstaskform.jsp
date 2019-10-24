@@ -1,9 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -42,98 +36,106 @@
 
 		<div class="" role="tabpanel" data-example-id="togglable-tabs">
 			<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-				<li role="presentation" ><a href="http://localhost:8080/project/detail/${project.projectId}">Home</a>
-				</li>
-				<li role="presentation" class=""><a href="http://localhost:8080/project/${project.projectId}/staff" >View
-					list staff of project</a>
-				</li>
-				<li role="presentation" class="active"><a href="http://localhost:8080/project/${project.projectId}/task">View
-					list task of project</a>
-				</li>
-				<li role="presentation" class=""><a href="http://localhost:8080/project/${project.projectId}/progress" >Project Progress</a>
-				</li>
+				<li class="active"><a href="/task/${task.taskId}/taskprogress/save"
+					   style="color: black">Update Progress Task</a></li>
+				<li><a href="/task/${task.taskId}/displayBarGraph"
+					   style="color: black">Progress Task</a></li>
+				<li><a href="/task/${task.taskId}/logtask"
+					   style="color: black">Log Process for Task</a></li>
 			</ul>
 			<div id="myTabContent" class="tab-content">
 				<div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-					<c:if test="${not empty notification}">
-						<div class="callout callout-info lead">
-							<h4>Notification !</h4>
-							<p>${notification}</p>
-						</div>
-					</c:if>
-					<h3 class="box-title">Danh sách các task của project :
-						${project.projectName}</h3>
-					<a class="btn btn-primary"
-					   href="project/${project.projectId}/addtask" role="button"><i
-							class="glyphicon glyphicon-plus"></i> Create Task for Project</a>
 					<!-- Info Boxes -->
-					<table id="example1" class="table table-bordered table-striped">
-						<thead>
-						<tr>
-							<th>#</th>
-							<th>Task Name</th>
-							<th>Name Create</th>
-							<th>Name Assign</th>
-							<th>Date Create</th>
-							<th>DeadLine</th>
-							<th>Progress</th>
-							<th>Action</th>
-							<th>Action</th>
-							<th>Sub task</th>
-						</tr>
-						</thead>
-						<tbody>
-						<c:forEach items="${tasks }" var="task" varStatus="s">
+					<div class="row">
+						<table class="table table-striped">
+							<tbody>
 							<tr>
-								<td><c:out value="${s.index + 1}" /></td>
-								<td><c:out value="${task.taskName}" /></td>
-								<td><c:out value="${task.nameCreate}" /></td>
+								<td colspan="1">
+									<h2>Log Task For Daily Work Form</h2> <spring:url
+										value="/task/${task.taskId}/taskprogress/save" var="saveURL" />
+									<fieldset>
 
-								<c:choose>
-									<c:when test="${not empty task.staffId }">
-										<td style="color: green"><c:out
-												value="${task.staffId.fullName}" /></td>
-									</c:when>
-									<c:otherwise>
-										<td><a href="project/${task.projectId.projectId}/task/${task.taskId}/assign"> assign task</a></td>
-									</c:otherwise>
-								</c:choose>
+										<form:form modelAttribute="taskprogress" method="POST"
+												   action="${saveURL}" cssClass="well form-horizontal"
+												   onsubmit="return validatedatelog() && validatenumber()">
 
+											<div id="taskInfo">
 
-								<td><c:out value="${task.dateCreate}" /></td>
-								<td><c:out value="${task.deadlineDate}" /></td>
-								<td><div class="progress"
-										 style="background-color: yellow">
-									<div class="progress-bar" role="progressbar"
-										 style="width: <c:out value="${task.taskState}" />; color: red"
-										 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-										<c:out value="${task.taskState}" />%
-									</div>
-								</div></td>
-								<td><a href="/task/${task.taskId}/taskprogress/save">cập nhập task</a></td>
-								<td><a
-										href="project/${project.projectId}/task/delete/${task.taskId}"
-										onclick="return confirm('Bạn chắc chắn xoá Task có tên : ${task.taskName} ?');"><i
-										class="glyphicon glyphicon-trash"></i> </a>
+												<div class="form-group" style="display: none">
+													<label class="control-label col-sm-2 requiredField"
+														   for="date"> Task Id <span class="asteriskField">
+															* </span>
+													</label>
+													<div class="col-md-8 inputGroupContainer">
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																	class="glyphicon glyphicon-book"></i></span>
+															<form:input path="taskId" cssClass="form-control"
+																		id="taskId" value="${task.taskId}" readonly="true" />
+															<form:input path="taskId" cssClass="form-control"
+																		id="startdate" value="${task.dateStart}" readonly="true" />
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-2 requiredField"
+														   for="date"> Date Log <span class="asteriskField">
+															* </span>
+													</label>
+													<div class="col-md-8 inputGroupContainer">
+														<div class="input-group">
+															<div class="input-group-addon">
+																<i class="fa fa-calendar"> </i>
+															</div>
+															<form:input class="form-control" id="dateLog"
+																		name="dateLog" path="dateLog" type="date" />
+														</div>
+													</div>
+												</div>
 
-									<a
-											href="project/${task.projectId.projectId}/task/${task.taskId}/edit">
-										<i class="glyphicon glyphicon-pencil"></i> </a>
+												<div class="form-group">
+													<label class="control-label col-sm-2 requiredField">
+														Detail Log Task </label>
+													<div class="col-md-8 inputGroupContainer">
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																	class="glyphicon glyphicon-list-alt"></i></span>
+															<form:textarea path="detailLog" id="detailLog"
+																		   placeholder="Detail Log Task" class="form-control"
+																		   required="true" rows="5"></form:textarea>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-sm-2 requiredField"
+														   for="date"> Progress<span class="asteriskField">
+															* </span>
+													</label>
+													<div class="col-md-8 inputGroupContainer">
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																	class="glyphicon glyphicon-book"></i></span>
+															<form:input path="progress" cssClass="form-control"
+																		id="progress" placeholder="progress %" required="true" />
+														</div>
+													</div>
+												</div>
+												<div class="text-center">
+													<button type="submit" class="btn btn-primary">Save</button>
+													<a type="button" class="btn btn-primary"
+													   href="/task/${task.taskId}/displayBarGraph"
+													   onclick="return confirm('Bạn chắc chắn muốn ngừng thực hiện tác vụ không ?')">Cancel
+													</a>
+												</div>
+											</div>
+										</form:form>
+									</fieldset>
 								</td>
-								<c:choose>
-									<c:when test="${not empty task.taskIdparent }">
-										<td>Đang là sub task</td>
-									</c:when>
-									<c:otherwise>
-										<td><a
-												href="project/${project.projectId}/task/${task.taskId}/addsubtask">tạo
-											sub task</a></td>
-									</c:otherwise>
-								</c:choose>
 							</tr>
-						</c:forEach>
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+
+					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 					<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
