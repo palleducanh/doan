@@ -26,7 +26,6 @@ public class ErrorController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName(); // get logged in username
 		modelAndView.addObject("username", name);
-		
 		modelAndView.setViewName("error/500");
 		return modelAndView;
 	}

@@ -168,17 +168,16 @@ public final class Util {
 
   public static long getTrest(Task task, Date moment, TaskProgressService taskProgressService) {
       if (moment.getTime() <= task.getDateStart().getTime()) {
-          return (task.getFinishDate().getTime() - task.getDateStart().getTime());
+          return (task.getDeadlineDate().getTime() - task.getDateStart().getTime());
       } else {
           TaskProgress taskProgress = taskProgressService.findLastTaskProgressOfTaskBefore(moment, task.getTaskId());
           if (taskProgress == null || (taskProgress != null && taskProgress.getProgress() == 0)) {
-              return (task.getFinishDate().getTime() - task.getDateStart().getTime());
+              return (task.getDeadlineDate().getTime() - task.getDateStart().getTime());
           } else {
-              return (100 - taskProgress.getProgress())
-                      * (task.getFinishDate().getTime() - task.getDateStart().getTime()) / 100;
+              return (100 - taskProgress.getProgress()) * (moment.getTime() - task.getDateStart().getTime())
+                      / taskProgress.getProgress();
           }
       }
-
   }
 
 }

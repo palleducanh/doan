@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.entity.Feedback;
 import com.example.demo.entity.Project;
 import com.example.demo.entity.ProjectProgress;
 import com.example.demo.entity.Task;
 import com.example.demo.entity.TaskProgress;
-import com.example.demo.service.FeedBackService;
 import com.example.demo.service.ProjectProgressService;
 import com.example.demo.service.ProjectService;
 import com.example.demo.service.TaskProgressService;
@@ -31,8 +29,7 @@ import com.example.demo.validation.Util;
 
 @Controller
 public class ChartController {
-	@Autowired
-	private FeedBackService feebackService;
+
 	@Autowired
 	private TaskProgressService taskProgressService;
 	@Autowired
@@ -90,41 +87,7 @@ public class ChartController {
 		model.addAttribute("actual", Util.getListActualProgress(task.getDateStart(), workLogList));
 		return "intror/logTask";
 	}
-	@GetMapping("/displayPieChart")
-	public String pieChart(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getName(); // get logged in username
-		model.addAttribute("username", name);
 
-		List<Feedback> listFeedBack = feebackService.listfeedBack();
-		int demVeryGood = 0;
-		int demGood = 0;
-		int demFaire = 0;
-		int demPoor = 0;
-		for (int i = 0; i < listFeedBack.size(); i++) {
-			if (listFeedBack.get(i).getExperience().equals("excellent")) {
-				demVeryGood++;
-			} else {
-				if (listFeedBack.get(i).getExperience().equals("good")) {
-					demGood++;
-				} else {
-					if (listFeedBack.get(i).getExperience().equals("faire")) {
-						demFaire++;
-					} else {
-						demPoor++;
-					}
-				}
-			}
-		}
-		int sum = demFaire + demGood + demPoor + demVeryGood;
-		System.out
-				.println("veery good" + demVeryGood + " good" + demGood + "faire : " + demFaire + "poor : " + demPoor);
-		model.addAttribute("excellent", demVeryGood * 100 / sum);
-		model.addAttribute("good", demGood * 100 / sum);
-		model.addAttribute("faire", demFaire * 100 / sum);
-		model.addAttribute("poor", demPoor * 100 / sum);
-		return "intror/pieChart";
-	}
 
 	@RequestMapping(value = "/task/{id}/taskprogress/save", method = RequestMethod.POST)
 	public ModelAndView save(@PathVariable("id") int id, @ModelAttribute("taskprogress") TaskProgress taskprogress,

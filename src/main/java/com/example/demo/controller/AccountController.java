@@ -27,8 +27,8 @@ public class AccountController {
 	private AccountService accountService;
 	@Autowired
 	private RoleService roleService;
-	@Autowired
-    public JavaMailSender emailSender;
+//	@Autowired
+//    public JavaMailSender emailSender;
 	
 	@GetMapping(value = "/account")
 	public ModelAndView getAllAccount() {
@@ -77,7 +77,7 @@ public class AccountController {
         message.setText("Hello"+account.getAccountName() + ", \r\n" + 
         		"You have successfully action an account");
         // Send Message!
-        this.emailSender.send(message);
+//        this.emailSender.send(message);
         redirect.addFlashAttribute("notification","bạn đã lưu account thành công !");
 		return new ModelAndView("redirect:/account");
 	}

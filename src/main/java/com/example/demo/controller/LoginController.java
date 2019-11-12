@@ -41,9 +41,12 @@ public class LoginController {
     @PostMapping(value = "/registration")
     public ModelAndView createNewUser(@Valid Account account, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("account", new Account());
+
         Account accountExist = accountService.findAccountByAccountName(account.getAccountName());
         if (accountExist != null) {
-            bindingResult.rejectValue("account", "error.email", "this is user with email name have exist in DB !");
+            modelAndView.setViewName("registration");
+            return modelAndView;
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
@@ -52,12 +55,11 @@ public class LoginController {
                 accountService.saveAccount(account);
             } catch (Exception e){
 				modelAndView.addObject("error", true);
-
 				modelAndView.setViewName("registration");
 			}
             modelAndView.addObject("successfull", "User add successfull !");
             modelAndView.addObject("account", new Account());
-            modelAndView.setViewName("registration");
+            modelAndView.setViewName("login");
         }
         return modelAndView;
     }

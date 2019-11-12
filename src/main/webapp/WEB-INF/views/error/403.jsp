@@ -1,9 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,14 +10,14 @@
 	<title>Gentelella Alela! | </title>
 
 	<!-- Bootstrap -->
-	<link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://localhost:8080/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Font Awesome -->
-	<link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="http://localhost:8080/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<!-- NProgress -->
-	<link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+	<link href="http://localhost:8080/vendors/nprogress/nprogress.css" rel="stylesheet">
 
 	<!-- Custom Theme Style -->
-	<link href="../build/css/custom.min.css" rel="stylesheet">
+	<link href="http://localhost:8080/build/css/custom.min.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -58,15 +52,15 @@
 </div>
 
 <!-- jQuery -->
-<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script src="http://localhost:8080/vendors/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="http://localhost:8080/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src="../vendors/fastclick/lib/fastclick.js"></script>
+<script src="http://localhost:8080/vendors/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
-<script src="../vendors/nprogress/nprogress.js"></script>
+<script src="http://localhost:8080/vendors/nprogress/nprogress.js"></script>
 
 <!-- Custom Theme Scripts -->
-<script src="../build/js/custom.min.js"></script>
+<script src="http://localhost:8080/build/js/custom.min.js"></script>
 </body>
 </html>

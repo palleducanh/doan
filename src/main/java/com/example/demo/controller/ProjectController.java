@@ -127,12 +127,10 @@ public class ProjectController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName(); // get logged in username
 		modelAndView.addObject("username", name);
-		
 		modelAndView.addObject("project", projectService.getProjecByiD(id));
 		modelAndView.addObject("staffs", projectService.getListStaffOfProject(id));
 		modelAndView.setViewName("liststaffofproject");
 		return modelAndView;
-
 	}
 
 	@GetMapping(value = "/project/{id}/staff/add")

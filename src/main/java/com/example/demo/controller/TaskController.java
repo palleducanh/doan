@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -45,10 +46,14 @@ public class TaskController {
 		ModelAndView modelAndView = new ModelAndView();
 //		String nameAssign = staffService.findOne(task.getStaffId().getStaffId()).getFullName();
 //		task.setNameAssign(nameAssign);
-		taskService.saveTask(task);
+		if(task.getDateStart().before(task.getDeadlineDate())) {
+			taskService.saveTask(task);
+			modelAndView.setViewName("redirect:/project/{id}/task");
+			redirect.addFlashAttribute("notification","bạn thực hiện action thành công !");
+		}else{
+			modelAndView.setViewName("/error/403");
+		}
 		modelAndView.addObject("project", projectService.getProjecByiD(id));
-		modelAndView.setViewName("redirect:/project/{id}/task");
-		redirect.addFlashAttribute("notification","bạn thực hiện action thành công !");
 		return modelAndView;
 	}
 

@@ -86,7 +86,7 @@
 											<th>Possition</th>
 											<th>Email</th>
 											<th>Action</th>
-											<th>Action</th>
+
 											<th>Delete Staff In Project</th>
 											<th>Action</th>
 										</tr>
@@ -104,8 +104,8 @@
 												<td><a
 														href="project/${project.projectId}/staff/${staff.staffId}/task/add">tạo
 													task cho staff</a></td>
-												<td><a href="/staff/${staff.staffId}/timeworks">log
-													work</a></td>
+<%--												<td><a href="/staff/${staff.staffId}/timeworks">log--%>
+<%--													work</a></td>--%>
 												<td><a
 														href="http://localhost:8080/project/${project.projectId}/staff/${staff.staffId}/delete"
 														onclick="return confirm('Bạn chắc chắn xoá Staff có tên : ${staff.fullName} ?');"><i
