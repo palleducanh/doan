@@ -31,10 +31,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author lthung
- */
+
 @Entity
 @Table(name = "role")
 @NamedQueries({

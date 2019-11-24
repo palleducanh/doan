@@ -27,10 +27,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author lthung
- */
+
 @Entity
 @Table(name = "staff_project")
 public class StaffProject implements Serializable {

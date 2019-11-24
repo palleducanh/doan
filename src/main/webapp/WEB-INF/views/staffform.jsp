@@ -151,7 +151,7 @@
 											</div>
 											<div class="form-group">
 												<label class="col-md-2 control-label">Gender<span
-														style="color: red"> * </span></label>
+							  							style="color: red"> * </span></label>
 												<div class="col-md-8 inputGroupContainer">
 													<div class="input-group">
 														<span class="input-group-addon"><i
@@ -171,9 +171,11 @@
 													<div class="input-group">
 														<span class="input-group-addon"><i
 																class="glyphicon glyphicon-book"></i></span>
-														<form:textarea path="skill" id="skill"
-																	   placeholder="nhập kỹ năng của bạn" class="form-control"
-																	   rows="4"></form:textarea>
+														<form:select path="skillStaffId" class="form-control"
+																	 style="height:30px" id="sel1" required="required">
+															<form:option value="" label="--- Select ---" />
+															<form:options items="${skills }" />
+														</form:select>
 													</div>
 												</div>
 											</div>

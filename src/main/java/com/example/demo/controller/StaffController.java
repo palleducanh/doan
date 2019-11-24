@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.demo.entity.Skill;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,10 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Department;
 import com.example.demo.entity.Staff;
-import com.example.demo.service.AccountService;
-import com.example.demo.service.DepartmentService;
-import com.example.demo.service.ProjectService;
-import com.example.demo.service.StaffService;
 
 @Controller
 public class StaffController {
@@ -38,7 +36,8 @@ public class StaffController {
 
 	@Autowired
 	private ProjectService projectService;
-
+	@Autowired
+	private SkillService skillService;
 	@GetMapping("/staff")
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -67,7 +66,14 @@ public class StaffController {
 		Map<Integer, String> departments = new HashMap<>();
 		listDepartment.forEach(item -> departments.put(item.getDepartmentId(), item.getDepartmentName()));
 		modelAndView.addObject("departments", departments);
-		
+
+
+		List<Skill> listSkill = skillService.findAllSkill();
+		Map<Integer, String> skills = new HashMap<>();
+		listSkill.forEach(item -> skills.put(item.getSkillId(), item.getName()));
+		modelAndView.addObject("skills", skills);
+
+
 		modelAndView.addObject("staff", new Staff());
 		modelAndView.setViewName("staffform");
 		return modelAndView;
@@ -83,6 +89,10 @@ public class StaffController {
 		modelAndView.addObject("staff", staffService.findOne(id));
 		modelAndView.addObject("departments", departmentService.findAllDepartment());
 		modelAndView.addObject("accounts", accountService.findAllAccount());
+		List<Skill> listSkill = skillService.findAllSkill();
+		Map<Integer, String> skills = new HashMap<>();
+		listSkill.forEach(item -> skills.put(item.getSkillId(), item.getName()));
+		modelAndView.addObject("skills", skills);
 		modelAndView.setViewName("staffform");
 		return modelAndView;
 	}

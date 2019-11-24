@@ -89,6 +89,25 @@
                                                         <div id="staffCombobox">
                                                             <div class="form-group">
                                                                 <label class="control-label col-sm-2 requiredField">
+                                                                    Skill need
+                                                                </label>
+                                                                <div class="col-md-8 inputGroupContainer">
+                                                                    <div class="input-group">
+															<span class="input-group-addon"><i
+                                                                    class="glyphicon glyphicon-user"></i></span>
+                                                                        <form:select path="skillTaskId"
+                                                                                     class="form-control">
+                                                                            <form:option value="0"
+                                                                                         label="--- Assign ---"/>
+                                                                            <form:options items="${Skills}"/>
+                                                                        </form:select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="staffCombobox">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-2 requiredField">
                                                                     Phụ thuộc vào task
                                                                 </label>
                                                                 <div class="col-md-8 inputGroupContainer">

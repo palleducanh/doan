@@ -51,10 +51,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
-/**
- *
- * @author lthung
- */
+
 @Entity
 @Table(name = "project")
 @NamedQueries({ @NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p"),

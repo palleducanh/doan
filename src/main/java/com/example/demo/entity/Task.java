@@ -40,10 +40,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
-/**
- *
- * @author lthung
- */
+
 @Entity
 @Table(name = "task")
 public class Task implements Serializable {
@@ -84,6 +81,15 @@ public class Task implements Serializable {
 
 	@Column(name = "task_state")
 	private Integer taskState;
+
+	public Skill getSkillTaskId() {
+		return skillTaskId;
+	}
+
+	public void setSkillTaskId(Skill skillTaskId) {
+		this.skillTaskId = skillTaskId;
+	}
+
 	@Basic(optional = false)
 	@Column(name = "discription")
 	private String discription;
@@ -92,7 +98,9 @@ public class Task implements Serializable {
 	@JoinColumn(name = "project_id", referencedColumnName = "project_id")
 	@ManyToOne(optional = false)
 	private Project projectId;
-
+	@JoinColumn(name = "skill_id", referencedColumnName = "skill_id")
+	@ManyToOne()
+	private Skill skillTaskId;
 	@JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
 	@ManyToOne()
 	private Staff staffId;

@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.example.demo.entity.Skill;
+import com.example.demo.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +33,8 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private SkillService skillService;
 
 	@GetMapping("/project")
 	public ModelAndView list() {
@@ -174,6 +178,16 @@ public class ProjectController {
 		Map<Integer, String> staffs = new HashMap<>();
 		listStaff.forEach(item -> staffs.put(item.getStaffId(), item.getFullName()));
 		model.addAttribute("staffs", staffs);
+
+
+
+		List<Skill> listSkill = skillService.findAllSkill();
+		Map<Integer, String> Skills = new HashMap<>();
+		listSkill.forEach(item -> Skills.put(item.getSkillId(), item.getName()));
+		model.addAttribute("Skills", Skills);
+
+
+
 		Map<Integer, String> listPreviousTask = new HashMap<>();
 		taskList.forEach(item -> listPreviousTask.put(item.getTaskId(), item.getTaskName()));
 		model.addAttribute("listPreviousTask", listPreviousTask);

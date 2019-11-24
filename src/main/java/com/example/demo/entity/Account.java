@@ -29,10 +29,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-/**
- *
- * @author lthung
- */
+
 @Entity
 @Table(name = "account")
 @NamedQueries({

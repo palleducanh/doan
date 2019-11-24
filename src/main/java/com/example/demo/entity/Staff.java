@@ -33,10 +33,6 @@ import javax.persistence.Table;
 
 import org.springframework.lang.Nullable;
 
-/**
- *
- * @author lthung
- */
 @Entity
 @Table(name = "staff")
 @NamedQueries({
@@ -80,6 +76,9 @@ public class Staff implements Serializable {
     private String telephone;
     @Column(name = "discription")
     private String discription;
+	@JoinColumn(name = "skill_id", referencedColumnName = "skill_id")
+	@ManyToOne()
+	private Skill skillStaffId;
     @ManyToMany
     @JoinTable(name = "staff_project",
         joinColumns = @JoinColumn(name = "staff_id"),
@@ -94,7 +93,15 @@ public class Staff implements Serializable {
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     @ManyToOne(optional = false)
     private Account accountId;
-    
+
+	public Skill getSkillStaffId() {
+		return skillStaffId;
+	}
+
+	public void setSkillStaffId(Skill skillStaffId) {
+		this.skillStaffId = skillStaffId;
+	}
+
 	public Integer getStaffId() {
 		return staffId;
 	}
