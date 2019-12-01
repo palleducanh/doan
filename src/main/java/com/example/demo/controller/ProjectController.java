@@ -183,7 +183,7 @@ public class ProjectController {
 
 		List<Skill> listSkill = skillService.findAllSkill();
 		Map<Integer, String> Skills = new HashMap<>();
-		listSkill.forEach(item -> Skills.put(item.getSkillId(), item.getName()));
+		listSkill.forEach(item -> Skills.put(item.getSkillId(), item.getSkillName()));
 		model.addAttribute("Skills", Skills);
 
 

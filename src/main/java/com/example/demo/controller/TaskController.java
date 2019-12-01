@@ -62,7 +62,7 @@ public class TaskController {
         modelAndView.addObject("username", name);
         List<Skill> listSkill = skillService.findAllSkill();
         Map<Integer, String> Skills = new HashMap<>();
-        listSkill.forEach(item -> Skills.put(item.getSkillId(), item.getName()));
+        listSkill.forEach(item -> Skills.put(item.getSkillId(), item.getSkillName()));
         modelAndView.addObject("Skills", Skills);
         Task task = taskService.findById(id);
         modelAndView.addObject("task", task);

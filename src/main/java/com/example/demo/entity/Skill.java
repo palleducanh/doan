@@ -17,13 +17,26 @@ public class Skill implements Serializable {
     private Integer skillId;
     @Basic(optional = false)
     @Column(name = "name")
-    private String Name;
+    private String skillName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "skillTaskId")
     @Nullable
     private Collection<Task> task;
 
+    public Skill() {
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+    @Transient
+    private boolean check = true;
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
     }
 
     public Integer getSkillId() {
@@ -34,12 +47,12 @@ public class Skill implements Serializable {
         this.skillId = skillId;
     }
 
-    public String getName() {
-        return Name;
+    public String getSkillName() {
+        return skillName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
     }
 
     @Nullable

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,5 +25,20 @@ public class SkillServiceImpl implements SkillService {
 	@Override
 	public List<Skill> findAllSkill() {
 		return skilRepo.findAll();
+	}
+
+	@Override
+	public void deleteSkillById(int id) {
+		skilRepo.deleteById(id);
+	}
+
+	@Override
+	public Skill findSkillById(int id) {
+		return skilRepo.getOne(id);
+	}
+
+	@Override
+	public void save(Skill skill) {
+		skilRepo.save(skill);
 	}
 }

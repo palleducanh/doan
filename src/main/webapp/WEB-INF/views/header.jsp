@@ -62,8 +62,7 @@
 							<li><a href="/department"><i class="fa fa-home"></i> Department Management </a></li>
 							<li><a href="/staff"><i class="fa fa-home"></i> Staff Management </a></li>
 							<li><a href="/project"><i class="fa fa-home"></i> Project Management </a></li>
-
-
+							<li><a href="/skill"><i class="fa fa-home"></i> Skill Management </a></li>
 						</ul>
 					</div>
 

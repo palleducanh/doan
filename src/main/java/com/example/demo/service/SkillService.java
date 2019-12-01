@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface SkillService {
 	List<Skill> findAllSkill();
-
+	void deleteSkillById(int id);
+	Skill findSkillById(int id);
+	void save(Skill skill);
 
 }

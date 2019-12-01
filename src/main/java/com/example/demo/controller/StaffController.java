@@ -70,7 +70,7 @@ public class StaffController {
 
 		List<Skill> listSkill = skillService.findAllSkill();
 		Map<Integer, String> skills = new HashMap<>();
-		listSkill.forEach(item -> skills.put(item.getSkillId(), item.getName()));
+		listSkill.forEach(item -> skills.put(item.getSkillId(), item.getSkillName()));
 		modelAndView.addObject("skills", skills);
 
 
@@ -91,7 +91,7 @@ public class StaffController {
 		modelAndView.addObject("accounts", accountService.findAllAccount());
 		List<Skill> listSkill = skillService.findAllSkill();
 		Map<Integer, String> skills = new HashMap<>();
-		listSkill.forEach(item -> skills.put(item.getSkillId(), item.getName()));
+		listSkill.forEach(item -> skills.put(item.getSkillId(), item.getSkillName()));
 		modelAndView.addObject("skills", skills);
 		modelAndView.setViewName("staffform");
 		return modelAndView;

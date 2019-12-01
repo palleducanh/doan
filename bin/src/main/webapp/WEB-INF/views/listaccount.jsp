@@ -79,7 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 											<!-- start message --> <a href="#">
 												<div class="pull-left">
 													<!-- User Image -->
-													<img src="dist/img/hung.jpg" class="img-circle"
+													<img src="dist/img/duc.jpg" class="img-circle"
 														alt="User Image">
 												</div> <!-- Message title and timestamp -->
 												<h4>
@@ -156,13 +156,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<li class="dropdown user user-menu">
 							<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <!-- The user image in the navbar-->
-								<img src="dist/img/hung.jpg" class="user-image" alt="User Image">
+								<img src="dist/img/duc.jpg" class="user-image" alt="User Image">
 								<!-- hidden-xs hides the username on small devices so only the image appears. -->
 								<span class="hidden-xs">${username}</span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- The user image in the menu -->
-								<li class="user-header"><img src="dist/img/hung.jpg"
+								<li class="user-header"><img src="dist/img/duc.jpg"
 									class="img-circle" alt="User Image">
 
 									<p>
@@ -211,7 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<!-- Sidebar user panel (optional) -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="dist/img/hung.jpg" class="img-circle" alt="User Image">
+						<img src="dist/img/duc.jpg" class="img-circle" alt="User Image">
 					</div>
 					<div class="pull-left info">
 						<p>${username}</p>
