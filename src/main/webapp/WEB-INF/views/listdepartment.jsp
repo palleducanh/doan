@@ -103,13 +103,12 @@
                                     <td><c:out value="${department.discription}"/></td>
                                     <td><spring:url
                                             value="/department/${department.departmentId}/edit"
-                                            var="editURL"/> <a href="${editURL}"><i
-                                            class="glyphicon glyphicon-pencil"></i></a> <spring:url
+                                            var="editURL"/> <a href="${editURL}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> <spring:url
                                             value="/department/${department.departmentId}/delete"
-                                            var="deleteURL"/> <a href="${deleteURL}"
-                                                                 onclick="return confirm('Bạn chắc chắn xoá Project có tên : ${project.projectName} ?');"><i
-                                            class="glyphicon glyphicon-trash"></i> </a>
+                                            var="deleteURL"/> <a href="${deleteURL}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" onclick="return confirm('Bạn chắc chắn xoá department có tên : ${department.departmentName} ?');"></i> Delete </a>
+
                                       </td>
+
                                 </tr>
                             </c:forEach>
                             </tbody>

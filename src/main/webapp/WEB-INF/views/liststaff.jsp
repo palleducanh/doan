@@ -143,15 +143,11 @@
 											href="/department/${staff.departmentId.departmentId}/detail"><c:out
 											value="${staff.departmentId.departmentName}" /></a></td>
 									<td><spring:url value="/staff/${staff.staffId}/edit"
-													var="editURL" /> <a href="${editURL}"><i
-											class="glyphicon glyphicon-pencil"></i></a> <spring:url
+													var="editURL" /> <a href="${editURL}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a> <spring:url
 											value="/staff/${staff.staffId}/delete" var="deleteURL" />
-										<a href="${deleteURL}"
-										   onclick="return confirm('Bạn chắc chắn xoá Staff có tên : ${staff.firstName} ?');"><i
-												class="glyphicon glyphicon-trash"></i> </a> <a
-												href="/staff/detail/${staff.staffId}"><i
-												class="glyphicon glyphicon-list-alt"></i> </a></td>
+										<a href="${deleteURL}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" onclick="return confirm('Bạn chắc chắn xoá Staff có tên : ${staff.firstName} ?');"></i> Delete </a> </td>
 								</tr>
+
 							</c:forEach>
 							</tbody>
 						</table>
