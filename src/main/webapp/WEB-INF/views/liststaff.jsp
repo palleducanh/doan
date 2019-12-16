@@ -137,7 +137,7 @@
 									<td><c:out value="${staff.fullName}" /></td>
 									<td style="color: blue"><c:out value="${staff.email}" /></td>
 									<td><c:out value="${staff.possition}" /></td>
-									<td><c:out value="${staff.skillStaffId.name}" /></td>
+									<td><c:out value="${staff.skillStaffId.skillName}" /></td>
 									<td><c:out value="${staff.gender}" /></td>
 									<td><a
 											href="/department/${staff.departmentId.departmentId}/detail"><c:out

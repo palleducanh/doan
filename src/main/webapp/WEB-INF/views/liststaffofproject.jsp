@@ -106,10 +106,15 @@
 													task cho staff</a></td>
 <%--												<td><a href="/staff/${staff.staffId}/timeworks">log--%>
 <%--													work</a></td>--%>
-												<td><a
-														href="http://localhost:8080/project/${project.projectId}/staff/${staff.staffId}/delete"
-														onclick="return confirm('Bạn chắc chắn xoá Staff có tên : ${staff.fullName} ?');"><i
-														class="glyphicon glyphicon-trash"></i> </a></td>
+<%--												<td><a--%>
+<%--														href="http://localhost:8080/project/${project.projectId}/staff/${staff.staffId}/delete"--%>
+<%--														onclick="return confirm('Bạn chắc chắn xoá Staff có tên : ${staff.fullName} ?');"><i--%>
+<%--														class="glyphicon glyphicon-trash"></i> </a></td>--%>
+												<td><spring:url
+														value="http://localhost:8080/project/${project.projectId}/staff/${staff.staffId}/delete"
+														var="deleteURL"/>
+													<a href="${deleteURL}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" onclick="return confirm('Bạn chắc chắn xoá staff có tên : ${staff.fullName} ?');"></i> Delete </a>
+												</td>
 												<td><a
 														href="project/${project.projectId}/staff/${staff.staffId}/task">List
 													Task Of Staff</a></td>

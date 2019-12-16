@@ -140,8 +140,8 @@
                                             value="/account/${account.accountId}/edit" var="editURL"/>
                                         <a href="${editURL}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                     <td><spring:url
-                                            value="/account/delete/${account.accountId}"
-                                            var="deleteURL"/>
+                                        value="/account/delete/${account.accountId}"
+                                        var="deleteURL"/>
                                     <a href="${deleteURL}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" onclick="return confirm('Bạn chắc chắn xoá ACCOUNT có tên : ${account.accountName} ?');"></i> Delete </a>
                                 </td>
 

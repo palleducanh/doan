@@ -111,14 +111,11 @@
 									</div>
 								</div></td>
 								<td><a href="/task/${task.taskId}/taskprogress/save">cập nhập task</a></td>
-								<td><a
-										href="project/${project.projectId}/task/delete/${task.taskId}"
-										onclick="return confirm('Bạn chắc chắn xoá Task có tên : ${task.taskName} ?');"><i
-										class="glyphicon glyphicon-trash"></i> </a>
+								<td>
 
-									<a
-											href="project/${task.projectId.projectId}/task/${task.taskId}/edit">
-										<i class="glyphicon glyphicon-pencil"></i> </a>
+
+									<a href="project/${project.projectId}/task/delete/${task.taskId}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" onclick="return confirm('Bạn chắc chắn xoá Task có tên : ${task.taskName} ?');"></i> Delete </a>
+									<a href="project/${task.projectId.projectId}/task/${task.taskId}/edit" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
 								</td>
 								<c:choose>
 									<c:when test="${not empty task.taskIdparent }">
