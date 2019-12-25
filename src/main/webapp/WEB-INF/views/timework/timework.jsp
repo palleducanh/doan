@@ -5,12 +5,9 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 <head>
+<base href="http://localhost:8080/" >
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>AdminLTE 2 | Starter</title>
@@ -35,6 +32,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
 <link href="../static/images/logo.png" href="@{/images/logo.png}"
 	rel="shortcut icon" />
+<link rel="stylesheet"
+	href="../plugins/fullcalendar/fullcalendar.min.css">
+<link rel="stylesheet"
+	href="../plugins/fullcalendar/fullcalendar.print.css" media="print">
 <link
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet"
@@ -223,7 +224,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				</div>
 
 				<!-- search form (Optional) -->
-				<form action="#" method="get" class="sidebar-form">
+				<form action="/welcome" method="get" class="sidebar-form">
 					<div class="input-group">
 						<input type="text" name="q" class="form-control"
 							placeholder="Search..."> <span class="input-group-btn">
@@ -240,31 +241,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<ul class="sidebar-menu">
 					<li class="header">HEADER</li>
 					<!-- Optionally, you can add icons to the links -->
-					<li class="active"><a href="/account"><i
+					<li class="active"><a href="/account" th:href="@{/account}"><i
 							class="glyphicon glyphicon-lock"></i> <span>Account
 								Management</span></a></li>
-					<li class="active"><a class="" href="/department"><i
+
+					<li class="active"><spring:url value="/department"
+							var="listURL" /> <a class="" href="${listURL}" role="list"><i
 							class="glyphicon glyphicon-home"></i> <span>Department
 								Management</span></a></li>
 
-					<li class="active"><a class="" href="/staff"><i
+					<li class="active"><spring:url value="/staff" var="listURL" />
+						<a class="" href="${listURL}" role="list"><i
 							class="glyphicon glyphicon-user"></i> <span>Staff
 								Management</span></a></li>
 
 					<li class="active"><a class="" href="/project"><i
 							class="glyphicon glyphicon-glass"></i> <span>Project Management</span></a></li>
-					<li class="active"><a class="" href="/getfeedback"><i
-							class="glyphicon glyphicon-wrench"></i> <span>FeedBack
-								Management</span></a></li>
-					<li class="active"><a class="" href="/aboutapp"><i
+
+					<li class="active"><spring:url value="/aboutapp" var="listURL" />
+						<a class="" href="${listURL}" role="list"><i
 							class="glyphicon glyphicon-info-sign"></i> <span>Introduce
 								About Web</span></a></li>
 
-					<li class="active"><a class="" href="/aboutteam"><i
+					<li class="active"><spring:url value="/aboutteam"
+							var="listURL" /> <a class="" href="${listURL}" role="list"><i
 							class="glyphicon glyphicon-camera"></i> <span>Introduce
 								About Team</span></a></li>
 
-					<li class="active"><a class="" href="/feedback/add"><i
+					<li class="active"><spring:url value="/feedback" var="listURL" />
+						<a class="" href="${listURL}" role="list"><i
 							class="glyphicon glyphicon-question-sign"></i> <span>Help
 								Us !</span></a></li>
 				</ul>
@@ -273,43 +278,165 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<!-- /.sidebar -->
 		</aside>
 
+
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Page Header <small>Optional description</small>
+				 <small>Lịch làm việc của : <strong style="font-size: 20px;">${staffs.fullName}</strong></small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-					<li class="active">Here</li>
+					<li><a href="/welcome"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Calendar</li>
 				</ol>
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
-				<div class="jumbotron text-xs-center">
-					<h1 class="display-3">Thank You Your FeedBack!</h1>
-					<p class="lead">
-						<strong>Please check your email</strong> for further instructions
-						on how to complete your account setup.
-					</p>
-					<hr>
-					<p>
-						Having trouble? <a href="#">Contact us</a>
-					</p>
-					<p class="lead">
-						<a class="btn btn-primary btn-sm" href="/welcome" role="button">Continue
-							to homepage</a>
-					</p>
-				</div>
-			</section>
+				<div class="row">
+					<div class="col-md-4" style="width: 37%">
+						<div class="box box-solid">
+							<div class="box-header with-border">
+								<c:if test="${not empty notification}">
+									<div class="callout callout-info lead">
+										<h4>Notification !</h4>
+										<p>${notification}</p>
+									</div>
+								</c:if>
+								<h3 class="box-title">S
+								chedule Form</h3>
+							</div>
+							<div class="box-body">
+								<table >
+									<tbody>
+										<tr>
+											<td colspan="1">
+												<h2 style="color: Green; position: center;">Create Events</h2> <spring:url
+													value="staff/${staff}/timework/saveevent" var="saveURL" />
+												<fieldset>
+													<form:form modelAttribute="event" method="POST"
+														action="${saveURL}" cssClass="well form-horizontal"
+														onsubmit="return validatedateproject()">
 
+														<div class="form-group" style="display: none">
+															<label class="control-label col-sm-2 requiredField">
+																ID Event <span class="asteriskField"> * </span>
+															</label>
+															<c:choose>
+																<c:when test="${not empty event.id }">
+																	<div class="col-md-8 inputGroupContainer">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																				class="glyphicon glyphicon-tags"></i></span>
+																			<form:input path="id" cssClass="form-control"
+																				required="required" readonly="true" />
+																		</div>
+																	</div>
+																</c:when>
+																<c:otherwise>
+																	<div class="col-md-8 inputGroupContainer">
+																		<div class="input-group">
+																			<span class="input-group-addon"><i
+																				class="glyphicon glyphicon-tags"></i></span>
+																			<form:input id="id" path="id" cssClass="form-control"
+																				readonly="true" />
+																		</div>
+																	</div>
+
+																</c:otherwise>
+															</c:choose>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2 requiredField"
+																for="date"> Title
+															</label>
+															<div class="col-md-8 inputGroupContainer">
+																<div class="input-group" style="width: 270px;">
+																	<span class="input-group-addon"><i
+																		class="glyphicon glyphicon-book"></i></span>
+																	<form:input path="title" cssClass="form-control"
+																		id="title" placeholder="title name" required="true" />
+																</div>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2 requiredField"
+																for="date">Start
+															</label>
+															<div class="col-md-8 inputGroupContainer">
+																<div class="input-group">
+																	<div class="input-group-addon">
+																		<i class="fa fa-calendar"> </i>
+																	</div>
+																	<form:input class="form-control" id="createDate"
+																		name="createDate" path="start" type="datetime-local" />
+																</div>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-sm-2 requiredField"
+																for="date">End
+															</label>
+															<div class="col-md-8 inputGroupContainer">
+																<div class="input-group">
+																	<div class="input-group-addon">
+																		<i class="fa fa-calendar"> </i>
+																	</div>
+																	<form:input class="form-control" id="end" name="end"
+																		path="end" type="datetime-local" />
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-sm-2">
+																Desc
+															</label>
+															<div class="col-md-8 inputGroupContainer">
+																<div class="input-group" style="width: 270px;">
+																	<span class="input-group-addon"><i
+																		class="glyphicon glyphicon-list-alt"></i></span>
+																	<form:textarea path="description" id="discription"
+																		placeholder="description" class="form-control"
+																		required="true" rows="5" ></form:textarea>
+																</div>
+															</div>
+														</div>
+
+														<div class="text-center">
+															<button type="submit" class="btn btn-primary" >Save</button>
+														</div>
+
+													</form:form>
+												</fieldset>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- /.col -->
+					<div class="col-md-6" style=" width: 64%;margin-left: -1.5%">
+						<div class="box box-primary">
+							<div class="box-body no-padding" >
+								<!-- THE CALENDAR -->
+
+								<div id="calendar" ></div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /. box -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
 
-		<!-- Main Footer -->
 		<footer class="main-footer">
 			<!-- To the right -->
 			<div class="pull-right hidden-xs">Nguyễn Đình Tài</div>
@@ -389,21 +516,179 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
 		<div class="control-sidebar-bg"></div>
-	</div>
-	<!-- ./wrapper -->
 
-	<!-- REQUIRED JS SCRIPTS -->
+		<!-- ./wrapper -->
 
-	<!-- jQuery 2.2.0 -->
-	<script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-	<!-- Bootstrap 3.3.6 -->
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="dist/js/app.min.js"></script>
+		<!-- jQuery 2.2.0 -->
+		<script src="../plugins/jQuery/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../bootstrap/js/bootstrap.min.js"></script>
+		<!-- jQuery UI 1.11.4 -->
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+		<!-- Slimscroll -->
+		<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+		<!-- FastClick -->
+		<script src="../plugins/fastclick/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../dist/js/app.min.js"></script>
+		<!-- AdminLTE for demo purposes -->
+		<script src="../dist/js/demo.js"></script>
+		<!-- fullCalendar 2.2.5 -->
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+		<script src="../plugins/fullcalendar/fullcalendar.min.js"></script>
+		<!-- Page specific script -->
+		<script>
+			$(function() {
 
-	<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. Slimscroll is required when using the
-     fixed layout. -->
+				/* initialize the external events
+				 -----------------------------------------------------------------*/
+				function ini_events(ele) {
+					ele.each(function() {
+
+						// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+						// it doesn't need to have a start or end
+						var eventObject = {
+							title : $.trim($(this).text())
+						// use the element's text as the event title
+						};
+
+						// store the Event Object in the DOM element so we can get to it later
+						$(this).data('eventObject', eventObject);
+
+						// make the event draggable using jQuery UI
+						$(this).draggable({
+							zIndex : 1070,
+							revert : true, // will cause the event to go back to its
+							revertDuration : 0
+						//  original position after the drag
+						});
+
+					});
+				}
+
+				ini_events($('#external-events div.external-event'));
+
+				/* initialize the calendar
+				 -----------------------------------------------------------------*/
+				//Date for the calendar events (dummy data)
+				var staff_id = ${staff};
+				var date = new Date();
+				var d = date.getDate(), m = date.getMonth(), y = date
+						.getFullYear();
+
+				$(document)
+						.ready(
+								function() {
+
+									$('#calendar')
+											.fullCalendar(
+													{
+														header : {
+															left : 'prev,next today',
+															center : 'title',
+															right : 'month,agendaWeek,agendaDay'
+														},
+														defaultDate : '2019-06-12',
+														editable : true,
+														eventLimit : true, // allow "more" link when too many events
+														events : {
+															url : '/staff/'
+																	+ staff_id
+																	+ '/timework',
+															type : 'GET',
+															error : function() {
+																alert('Lịch làm việc của bạn chưa có sự kiện nào.!');
+															},
+															color : 'red', // a non-ajax option
+															textColor : 'white' // a non-ajax option
+														},
+														drop : function(date,
+																allDay) {
+															// retrieve the dropped element's stored Event Object
+															var originalEventObject = $(
+																	this)
+																	.data(
+																			'eventObject');
+
+															// we need to copy it, so that multiple events don't have a reference to the same object
+															var copiedEventObject = $
+																	.extend({},
+																			originalEventObject);
+
+															// assign it the date that was reported
+															copiedEventObject.start = date;
+															copiedEventObject.allDay = allDay;
+															copiedEventObject.backgroundColor = $(
+																	this)
+																	.css(
+																			"background-color");
+															copiedEventObject.borderColor = $(
+																	this)
+																	.css(
+																			"border-color");
+
+															// render the event on the calendar
+															// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+															$('#calendar')
+																	.fullCalendar(
+																			'renderEvent',
+																			copiedEventObject,
+																			true);
+
+															// is the "remove after drop" checkbox checked?
+															if ($(
+																	'#drop-remove')
+																	.is(
+																			':checked')) {
+																// if so, remove the element from the "Draggable Events" list
+																$(this)
+																		.remove();
+															}
+														}
+													});
+
+								});
+
+				/* ADDING EVENTS */
+				var currColor = "#3c8dbc"; //Red by default
+				//Color chooser button
+				var colorChooser = $("#color-chooser-btn");
+				$("#color-chooser > li > a").click(function(e) {
+					e.preventDefault();
+					//Save color
+					currColor = $(this).css("color");
+					//Add color effect to button
+					$('#add-new-event').css({
+						"background-color" : currColor,
+						"border-color" : currColor
+					});
+				});
+				$("#add-new-event").click(function(e) {
+					e.preventDefault();
+					//Get value and make sure it is not null
+					var val = $("#new-event").val();
+					if (val.length == 0) {
+						return;
+					}
+
+					//Create events
+					var event = $("<div />");
+					event.css({
+						"background-color" : currColor,
+						"border-color" : currColor,
+						"color" : "#fff"
+					}).addClass("external-event");
+					event.html(val);
+					$('#external-events').prepend(event);
+
+					//Add draggable funtionality
+					ini_events(event);
+
+					//Remove event from text input
+					$("#new-event").val("");
+				});
+			});
+		</script>
 </body>
 </html>

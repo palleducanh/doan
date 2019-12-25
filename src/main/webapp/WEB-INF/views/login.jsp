@@ -12,6 +12,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="images/favicon.ico" type="image/ico"/>
 
 	<title>Gentelella Alela! | </title>
 
@@ -33,11 +34,10 @@
 	<a class="hiddenanchor" id="signup"></a>
 	<a class="hiddenanchor" id="signin"></a>
 	<c:if test="${not empty param.error}">
-		<div class="alert alert-danger" role="alert">Sai Tên Ho?c M?t
-			Kh?u !</div>
+		<div class="alert alert-danger" role="alert">Wrong username or password !</div>
 	</c:if>
 	<c:if test="${not empty param.logout}">
-		<div class="alert alert-success" role="alert">??ng xu?t thành công !</div>
+		<div class="alert alert-success" role="alert">Logged out successfully !</div>
 	</c:if>
 	<div class="login_wrapper">
 		<div class="animate form login_form">
@@ -55,7 +55,7 @@
 					<div>
 						<button type="submit" class="btn btn-primary btn-block btn-flat">Sign
 							In</button>
-						<a class="reset_pass" href="#">Lost your password?</a>
+<%--						<a class="reset_pass" href="#">Lost your password?</a>--%>
 					</div>
 
 					<div class="clearfix"></div>
@@ -68,10 +68,10 @@
 						<div class="clearfix"></div>
 						<br />
 
-						<div>
-							<h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-							<p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-						</div>
+<%--						<div>--%>
+<%--							<h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>--%>
+<%--							<p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>--%>
+<%--						</div>--%>
 					</div>
 				</form>
 			</section>

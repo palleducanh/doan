@@ -85,6 +85,7 @@ public class TaskProgressServiceImpl implements TaskProgressService {
     Date latestDate = taskProgressRepo.getLastDate(task.getTaskId());
     TaskProgress sameTimeTaskProgress = taskProgressRepo
         .findByTaskIdAndDateLog(taskProgress.getTaskId().getTaskId(), taskProgress.getDateLog());
+
     if (sameTimeTaskProgress == null) {
       taskProgressRepo.save(taskProgress);
     } else {
@@ -124,12 +125,14 @@ public class TaskProgressServiceImpl implements TaskProgressService {
             childTask = childTask.getPreviousTask().iterator().next();
           }
         }
-        if (tRest > tRestMax) {
-          tRestMax = tRest;
-        }
+//        if (tRest > tRestMax) {
+//          tRestMax = tRest;
+//        }
+        tRestMax += tRest;
       }
-      int progressTask = 100 - (int) (100 * tRestMax
-          / (taskParent.getDeadlineDate().getTime() - taskParent.getDateStart().getTime()));
+
+      int progressTask = 100 - (int) ((100 * tRestMax)
+          / (taskProgress.getDateLog().getTime() - taskParent.getDateStart().getTime()));
       if (progressTask < 0) {
         progressTask = 0;
       }
@@ -143,9 +146,9 @@ public class TaskProgressServiceImpl implements TaskProgressService {
         projectProgress = new ProjectProgress();
         projectProgress.setProjectId(task.getProjectId());
         projectProgress.setDateLog(taskProgress.getDateLog());
-        projectProgress.setDetailLog(task.toString() + ": " + taskProgress.getDetailLog() + "\n");
+//        projectProgress.setDetailLog(task.toString() + ": " + taskProgress.getDetailLog() + "\n");
       } else {
-        projectProgress.setDetailLog(projectProgress.getDetailLog() + task.toString() + ": "
+        projectProgress.setDetailLog(projectProgress.getDetailLog() + ": "
             + taskProgress.getDetailLog() + "\n");
       }
       int projectId = task.getProjectId().getProjectId();

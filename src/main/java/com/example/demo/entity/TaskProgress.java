@@ -36,8 +36,7 @@ public class TaskProgress implements Serializable{
 
   @Column(name = "progress")
   private int progress;
-
-  @Column(name = "detail_log")
+  @Column(name = "detail_log",length = 3000)
   private String detailLog;
 
   @JoinColumn(name = "task_id", referencedColumnName = "task_id")

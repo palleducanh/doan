@@ -96,7 +96,10 @@ public class ChartController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName(); // get logged in username
 		modelAndView.addObject("username", name);
-		
+		if(taskprogress.getDateLog().compareTo(taskprogress.getTaskId().getDateStart())==-1){
+			modelAndView.setViewName("/error/403");
+			return modelAndView;
+		}
 		taskProgressService.createTaskProgress(taskprogress);
 		redirect.addFlashAttribute("notification", "bạn đã thực hiện ghi tiến độ thành công !");
 		modelAndView.setViewName("redirect:/task/{id}/displayBarGraph");

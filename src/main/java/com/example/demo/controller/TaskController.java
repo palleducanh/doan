@@ -43,6 +43,9 @@ public class TaskController {
 //		String nameAssign = staffService.findOne(task.getStaffId().getStaffId()).getFullName();
 //		task.setNameAssign(nameAssign);
         if (task.getDateStart().before(task.getDeadlineDate())) {
+            if(task.getTaskId()!=null){
+                task.setTaskIdparent(taskService.findById(task.getTaskId()).getTaskIdparent());
+            }
             taskService.saveTask(task);
             modelAndView.setViewName("redirect:/project/{id}/task");
             redirect.addFlashAttribute("notification", "bạn thực hiện action thành công !");
@@ -65,6 +68,10 @@ public class TaskController {
         listSkill.forEach(item -> Skills.put(item.getSkillId(), item.getSkillName()));
         modelAndView.addObject("Skills", Skills);
         Task task = taskService.findById(id);
+        List<Task> taskList = projectService.getListBigTaskOfProject(idproject);
+        Map<Integer, String> listPreviousTask = new HashMap<>();
+        taskList.forEach(item -> listPreviousTask.put(item.getTaskId(), item.getTaskName()));
+        modelAndView.addObject("listPreviousTask", listPreviousTask);
         modelAndView.addObject("task", task);
         List<Staff> listStaff = projectService.getListStaffOfProject(task.getProjectId().getProjectId());
         Map<Integer, String> staffs = new HashMap<>();
@@ -81,6 +88,10 @@ public class TaskController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); // get logged in username
         modelAndView.addObject("username", name);
+        List<Skill> listSkill = skillService.findAllSkill();
+        Map<Integer, String> Skills = new HashMap<>();
+        listSkill.forEach(item -> Skills.put(item.getSkillId(), item.getSkillName()));
+        modelAndView.addObject("Skills", Skills);
 
         Task task = new Task();
         task.setProjectId(projectService.getProjecByiD(id));
@@ -101,7 +112,10 @@ public class TaskController {
         modelAndView.addObject("username", name);
 
         modelAndView.addObject("project", projectService.getProjecByiD(idproject));
-
+        List<Skill> listSkill = skillService.findAllSkill();
+        Map<Integer, String> Skills = new HashMap<>();
+        listSkill.forEach(item -> Skills.put(item.getSkillId(), item.getSkillName()));
+        modelAndView.addObject("Skills", Skills);
         Task parentTask = taskService.findById(id);
         Task task = new Task();
         task.setProjectId(parentTask.getProjectId());

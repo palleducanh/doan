@@ -144,6 +144,9 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                    <div class="centdiv">
+                        <a class="btn btn-primary" href="/project/${task.projectId.projectId}/task" role="button"> Back</a>
+                    </div>
                 </div>
                     </div>
 

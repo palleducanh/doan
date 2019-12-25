@@ -65,7 +65,7 @@ public abstract class ObjectProgress {
 	}
 
 	public void setDetailLog(String detailLog) {
-		this.detailLog = detailLog;
+		this.detailLog = null;
 	}
 
 	public int getConfirm() {

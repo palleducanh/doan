@@ -57,6 +57,9 @@
 										</p>
 									</div>
 								</c:if>
+								<div class="centdiv">
+									<a class="btn btn-primary" href="/project/${task.projectId.projectId}/task" role="button"> Back</a>
+								</div>
 								<script
 										src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 								<!-- Latest compiled and minified JavaScript -->

@@ -37,7 +37,7 @@ public class ProjectProgress implements Serializable{
   @Column(name = "progress")
   private int progress;
 
-  @Column(name = "detail_log")
+  @Column(name = "detail_log",length = 3000)
   private String detailLog;
   @JoinColumn(name = "project_id", referencedColumnName = "project_id")
   @ManyToOne(optional = false)
@@ -53,7 +53,7 @@ public class ProjectProgress implements Serializable{
     this.progressId = progressId;
     this.dateLog = dateLog;
     this.progress = progress;
-    this.detailLog = detailLog;
+    this.detailLog = "progress";
     this.projectId = projectId;
   }
 
@@ -86,7 +86,7 @@ public class ProjectProgress implements Serializable{
   }
 
   public void setDetailLog(String detailLog) {
-    this.detailLog = detailLog;
+    this.detailLog = "progress";
   }
 
   public Project getProjectId() {
